@@ -11,9 +11,9 @@ int liste;
 int numerobv;
 }reclamation;
 
-void ajouter(int id, char idreclamation,char reclamation, char type,int liste,int numerobv);
-void modifier(int id, char idreclamation, char reclamation ,char type,int liste,int numerobv);
-reclamation supprimer(int id,char p.idreclamation);
+int ajouter(int id, char idreclamation,char reclamation, char type,int liste,int numerobv);
+int modifier(int id, char idreclamation, char reclamation ,char type,int liste,int numerobv);
+int supprimer(int id,char idreclamation);
 reclamation chercher(int id, char idreclamation);
 
 #endif // reclamation_H_INCLUDED
