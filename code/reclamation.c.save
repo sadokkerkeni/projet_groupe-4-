@@ -1,0 +1,91 @@
+#include "reclamation.h"
+
+int ajouter(char *filename, reclamation r)
+{
+    FILE * f=fopen(filename, "a");
+
+	 if(f!=NULL)
+    {
+        fprintf(f," %d %s %s %s %d %d",r.id,r.idreclamation,r.reclamation,r.type,r.liste,r.numerobv);
+        fclose(f);
+        return 1;
+    }
+    else return 0;
+}
+
+int modifier(char * filename, int id, reclamation aux )
+{
+int tr=0;
+reclamation r;
+    FILE * f=fopen(filename, "r");
+    FILE * f2 =fopen("aux.txt", "w");
+    if(f==NULL || f2==NULL)
+return 0;
+else
+    {
+while(fscanf(f," %d %s %s %s %d %d",&r.id,r.idreclamation, r.reclamation,r.type,&r.liste,&r.numerobv )!=EOF)
+{
+if(r.id!=id){
+        fprintf(f2," %d %s %s %s %d %d",r.id, r.idreclamation,r.reclamation,r.type,r.liste,r.numerobv);
+	tr=1;
+}
+else
+
+  fprintf(f2," %d %s %s %s %d %d", r.id, r.idreclamation,r.reclamation,r.type,r.liste,r.numerobv);
+
+}
+}
+
+        fclose(f);
+        fclose(f2);
+remove(filename);
+rename("aux.txt", filename);
+        return tr;
+  }
+
+
+int supprimer(char * filename ,int id )
+{
+	int tr=0;
+	reclamation r;
+    FILE * f=fopen(filename, "r");
+    FILE * f2 =fopen("aux.txt", "w");
+    if(f!=NULL && f2!=NULL)
+
+
+else
+    {
+while(fscanf(f,"%d %s",&r.id, r.idreclamation)!=EOF)
+{
+if(r.id!=id){
+        fprintf(f2,"%d %s ",r.id,r.idreclamation);
+	tr=1;
+}
+}
+        fclose(f);
+        fclose(f2);
+remove(filename);
+rename("aux.txt", filename);
+        return tr;
+}
+
+reclamation chercher(char * filename ,int id)
+{
+reclamation r;
+int tr=0;
+    FILE * f=fopen(filename, "r");
+ if(f!=NULL )
+    {
+while(fscanf(f," %d %s %s %s %d %d",&r.id,r.idreclamation, r.reclamation,r.type,&r.liste,&r.numerobv )!=EOF && tr==0)
+{
+if(id==r.id)
+tr=1;
+}
+}
+fclose(f);
+if(tr==0)
+r.id=-1;
+
+return r;
+}
+
